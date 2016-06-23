@@ -15,10 +15,10 @@
         }],
         ['OS=="linux" and use_system_libnanomsg=="true"', {
           'include_dirs+': [
-            '<!@(pkg-config libnanomsg --cflags-only-I | sed s/-I//g)',
+            '<!@(pkg-config nanomsg --cflags-only-I | sed s/-I//g)/nanomsg',
           ],
           'libraries': [
-            '<!@(pkg-config libnanomsg --libs)',
+            '<!@(pkg-config nanomsg --libs)',
           ],
         }],
         ['OS=="win"', {
