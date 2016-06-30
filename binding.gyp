@@ -15,18 +15,22 @@
         }],
         ['OS=="linux" and use_system_libnanomsg=="true"', {
           'include_dirs+': [
-            '<!@(pkg-config nanomsg --cflags-only-I | sed s/-I//g)/nanomsg',
+            '<!@(pkg-config nanomsg --cflags-only-I | sed s/-I//g)/nanomsg  || echo "")',
+            '<!@(pkg-config libnanomsg --cflags | sed s/-I//g || echo "")',
           ],
           'libraries': [
-            '<!@(pkg-config nanomsg --libs)',
+            '<!@(pkg-config nanomsg --libs || echo "")',
+            '<!@(pkg-config libnanomsg --libs || echo "")',
           ],
         }],
         ['OS=="mac" and use_system_libnanomsg=="true"', {
           'include_dirs+': [
-            '<!@(pkg-config libnanomsg --cflags | sed s/-I//g)',
+            '<!@(pkg-config libnanomsg --cflags | sed s/-I//g || echo "")',
+            '<!@(pkg-config nanomsg --cflags | sed s/-I//g || echo "")',
           ],
           'libraries': [
-            '<!@(pkg-config libnanomsg --libs)',
+            '<!@(pkg-config libnanomsg --libs || echo "")',
+            '<!@(pkg-config nanomsg --libs || echo "")',
           ],
         }],
         ['OS=="win"', {
